@@ -21,6 +21,7 @@ services:
     environment:
       BASE_URL: http://localhost:9000
       DATABASE_URL: mysql://user:password@db/mydb
+      JWT_SECRET: JWT_secret_key
     volumes:
       - backend-uploads:/public/uploads
 

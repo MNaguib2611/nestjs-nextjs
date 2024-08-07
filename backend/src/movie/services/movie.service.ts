@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from '../movie.entity';
 import { CreateMovieDto } from '../dto/request/create-movie.dto';
+import { UpdateMovieDto } from '../dto/request/update-movie.dto';
 
 @Injectable()
 export class MovieService {
@@ -12,15 +13,21 @@ export class MovieService {
   ) {}
 
   findAll(): Promise<Movie[]> {
-    return this.movieRepository.find({ relations: ['genres'] });
+    return this.movieRepository.find({});
+  }
+
+  findOne(id: number): Promise<Movie[]> {
+    return this.movieRepository.find({ where: { id } });
   }
 
   create(movie: CreateMovieDto): Promise<Movie> {
     return this.movieRepository.save(movie);
   }
 
-  async update(id: number, movieData: Partial<Movie>): Promise<Movie> {
-    const movie = await this.movieRepository.findOneOrFail({ where: { id } });
+  async update(id: number, movieData: UpdateMovieDto): Promise<Movie> {
+    const movie = await this.movieRepository.findOneOrFail({
+      where: { id },
+    });
     this.movieRepository.merge(movie, movieData);
     return this.movieRepository.save(movie);
   }
