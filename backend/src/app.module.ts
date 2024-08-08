@@ -16,8 +16,8 @@ import { UsersService } from './users/users.service';
     AuthModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 33066,
+      host: 'db',
+      port: 3306,
       username: 'root',
       password: 'password',
       database: 'mydb',
@@ -43,7 +43,7 @@ export class AppModule implements OnModuleInit {
   async onModuleInit() {
     await this.genreSeederService.seedGenres();
     await this.usersService.create({
-      username: 'john',
+      username: 'john@example.com',
       password: 'password',
     });
   }

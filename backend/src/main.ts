@@ -6,6 +6,9 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .setTitle('Movies API')
     .setDescription('The movies API description')

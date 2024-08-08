@@ -8,6 +8,7 @@ import {
   UploadedFile,
   UseInterceptors,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { MovieService } from './services/movie.service';
 import { MovieResponseDto } from './dto/response/movie-response.dto';
@@ -21,14 +22,15 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 
 @Controller('movies')
 @ApiTags('movies')
-@UseGuards(AuthGuard)
-@ApiBearerAuth('token')
 export class MovieController {
   constructor(private readonly movieService: MovieService) {}
 
   @Get()
-  async findAll(): Promise<MovieResponseDto[]> {
-    return this.movieService.findAll();
+  async findAll(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 8,
+  ) {
+    return this.movieService.findAll(page, limit);
   }
 
   @Post()
@@ -61,5 +63,11 @@ export class MovieController {
   ): Promise<{ url: string }> {
     const url = `${process.env.BASE_URL}/public/uploads/${file.filename}`;
     return { url };
+  }
+
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth('token')
+  async test() {
+    return { test: 'test' };
   }
 }

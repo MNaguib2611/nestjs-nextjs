@@ -1,0 +1,121 @@
+/* src/app/styles/globals.css */
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.background {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    rgba(9, 53, 69, 1) 0%,
+    rgba(34, 73, 87, 1) 60%,
+    rgba(9, 44, 57, 1) 100%
+  );
+  overflow: hidden;
+}
+
+.background-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 64px;
+  line-height: 80px;
+}
+
+h2 {
+  font-size: 48px;
+  line-height: 56px;
+}
+
+h3 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h4 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h5 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+h6 {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600; /* SemiBold */
+  font-size: 64px;
+  line-height: 80px;
+  letter-spacing: 0%;
+}
+
+h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600; /* SemiBold */
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: 0%;
+}
+
+h3 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600; /* SemiBold */
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: 0%;
+}
+
+h4 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0%;
+}
+
+h5 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+}
+
+h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700; /* Bold */
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0%;
+}

@@ -12,10 +12,16 @@ export class MovieService {
     private movieRepository: Repository<Movie>,
   ) {}
 
-  findAll(): Promise<Movie[]> {
-    return this.movieRepository.find({});
+  async findAll(
+    page: number,
+    limit: number,
+  ): Promise<{ movies: Movie[]; total: number }> {
+    const [movies, total] = await this.movieRepository.findAndCount({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+    return { movies, total };
   }
-
   findOne(id: number): Promise<Movie[]> {
     return this.movieRepository.find({ where: { id } });
   }

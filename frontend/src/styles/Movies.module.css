@@ -1,0 +1,154 @@
+.container {
+  padding: 25px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow-y: auto; /* Ensure vertical scrolling */
+  height: calc(
+    100vh - 60px
+  ); /* Adjust height to be slightly less than the full viewport to accommodate padding/margins */
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  color: white;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 16px;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.movieGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1200px) {
+  .movieGrid {
+    grid-template-columns: repeat(
+      3,
+      1fr
+    ); /* 3 cards per row for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .movieGrid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 2 cards per row for small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .movieGrid {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* Maintain 2 cards per row for mobile screens */
+    gap: 15px; /* Adjust gap for smaller screens */
+  }
+}
+
+.movieCard {
+  background: rgba(9, 44, 57, 1);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movieImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.movieInfo {
+  padding: 10px;
+}
+
+.movieTitle {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+}
+
+.movieYear {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: white;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pageButton {
+  background: rgba(43, 209, 126, 1);
+  color: white;
+  padding: 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pageButton:disabled {
+  background: rgba(43, 209, 126, 0.5);
+  cursor: not-allowed;
+}
+
+.button {
+  background: rgba(43, 209, 126, 1);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background: rgba(43, 209, 126, 0.8);
+}
