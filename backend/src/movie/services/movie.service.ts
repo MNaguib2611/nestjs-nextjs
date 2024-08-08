@@ -22,8 +22,8 @@ export class MovieService {
     });
     return { movies, total };
   }
-  findOne(id: number): Promise<Movie[]> {
-    return this.movieRepository.find({ where: { id } });
+  findOne(id: number): Promise<Movie> {
+    return this.movieRepository.findOne({ where: { id } });
   }
 
   create(movie: CreateMovieDto): Promise<Movie> {

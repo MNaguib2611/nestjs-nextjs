@@ -2,30 +2,37 @@ import React, { useState } from "react";
 import Image from "next/image";
 import styles from "../styles/CreateMoviePage.module.css"; // Import CSS module for styling
 import { MovieFormValues } from "@/types";
+import { uploadPoster } from "../utils/api"; // Import the upload function
 
 interface MovieFormProps {
   initialMovie: {
     title: string;
     publishingYear: number;
-    poster: string;
+    poster: string | undefined;
   };
   onSubmit: (formData: MovieFormValues) => void;
 }
 
 const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
   const [formValues, setFormValues] = useState(initialMovie);
+  const [uploading, setUploading] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setFormValues({
-        ...formValues,
-        poster: URL.createObjectURL(e.target.files[0]),
-      });
+      setUploading(true);
+      try {
+        const url = await uploadPoster(e.target.files[0]);
+        setFormValues({ ...formValues, poster: url });
+      } catch (error) {
+        console.error("Failed to upload image:", error);
+      } finally {
+        setUploading(false);
+      }
     }
   };
 
@@ -36,9 +43,11 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.gridContainer}>
+      <div className={styles.formContent}>
         <div className={styles.imageUpload}>
-          <label htmlFor="poster">Drop an image here</label>
+          <label htmlFor="poster" className={styles.customFileUpload}>
+            {uploading ? "Uploading..." : "Upload Image"}
+          </label>
           <input
             type="file"
             id="poster"
@@ -61,34 +70,38 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
             )}
           </div>
         </div>
-        <div className={styles.inputGroup}>
-          <input
-            className={styles.input}
-            type="text"
-            id="title"
-            name="title"
-            value={formValues.title}
-            onChange={handleInputChange}
-            placeholder="Title"
-          />
-          <input
-            className={styles.input}
-            type="number"
-            id="publishingYear"
-            name="publishingYear"
-            value={formValues.publishingYear}
-            onChange={handleInputChange}
-            placeholder="Publishing year"
-          />
+        <div className={styles.inputsAndButtons}>
+          <div className={styles.inputGroup}>
+            <input
+              className={styles.input}
+              type="text"
+              id="title"
+              name="title"
+              value={formValues.title}
+              onChange={handleInputChange}
+              placeholder="Title"
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <input
+              className={styles.input}
+              type="number"
+              id="publishingYear"
+              name="publishingYear"
+              value={formValues.publishingYear}
+              onChange={handleInputChange}
+              placeholder="Publishing year"
+            />
+          </div>
+          <div className={styles.buttonGroup}>
+            <button type="button" className={styles.cancelButton}>
+              Cancel
+            </button>
+            <button type="submit" className={styles.submitButton}>
+              Submit
+            </button>
+          </div>
         </div>
-      </div>
-      <div className={styles.buttonGroup}>
-        <button type="button" className={styles.cancelButton}>
-          Cancel
-        </button>
-        <button type="submit" className={styles.submitButton}>
-          Submit
-        </button>
       </div>
     </form>
   );

@@ -35,20 +35,28 @@ export const fetchMovies = async (page: number = 1, limit: number = 8) => {
   return api.get(`/movies?page=${page}&limit=${limit}`);
 };
 
-export const fetchMovie = async (id: number) => {
-  return api.get(`/movies/${id}`);
-};
-
 export const createMovie = async (movieData: any) => {
   return api.post("/movies", movieData);
 };
 
 export const updateMovie = async (id: number, movieData: any) => {
-  return api.put(`/movies/${id}`, movieData);
+  return api.patch(`/movies/${id}`, movieData);
 };
 
-export const deleteMovie = async (id: number) => {
-  return api.delete(`/movies/${id}`);
+export const getMovieById = async (id: number) => {
+  const response = await api.get(`/movies/${id}`);
+  return response.data;
+};
+
+export const uploadPoster = async (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  const response = await api.post("/movies/upload", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return response.data.url; // Assumes the API returns { url: string }
 };
 
 export default api;

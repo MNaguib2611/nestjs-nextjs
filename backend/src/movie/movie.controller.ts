@@ -39,7 +39,7 @@ export class MovieController {
   }
 
   @Get(':id')
-  async findone(@Param('id') id: number): Promise<MovieResponseDto[]> {
+  async findOne(@Param('id') id: number): Promise<MovieResponseDto> {
     return this.movieService.findOne(id);
   }
 

@@ -15,6 +15,7 @@
   box-sizing: border-box;
   color: #fff;
   font-family: "Montserrat", sans-serif;
+  cursor: pointer;
 }
 
 .imageContainer {
