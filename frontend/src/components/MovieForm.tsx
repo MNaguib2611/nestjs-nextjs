@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "../styles/CreateMoviePage.module.css"; // Import CSS module for styling
 import { MovieFormValues } from "@/types";
 import { uploadPoster } from "../utils/api"; // Import the upload function
+import { useRouter } from "next/navigation";
 
 interface MovieFormProps {
   initialMovie: {
@@ -16,9 +17,15 @@ interface MovieFormProps {
 const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
   const [formValues, setFormValues] = useState(initialMovie);
   const [uploading, setUploading] = useState(false);
+  const router = useRouter();
+
+  const handleCancel = () => {
+    router.push("/");
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log("formValues", formValues);
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -27,7 +34,9 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
       setUploading(true);
       try {
         const url = await uploadPoster(e.target.files[0]);
-        setFormValues({ ...formValues, poster: url });
+        console.log(formValues, url, { ...formValues, poster: url });
+        // setFormValues({ ...formValues, poster: url });
+        // console.log(formValues);
       } catch (error) {
         console.error("Failed to upload image:", error);
       } finally {
@@ -94,7 +103,11 @@ const MovieForm: React.FC<MovieFormProps> = ({ initialMovie, onSubmit }) => {
             />
           </div>
           <div className={styles.buttonGroup}>
-            <button type="button" className={styles.cancelButton}>
+            <button
+              type="button"
+              className={styles.cancelButton}
+              onClick={handleCancel}
+            >
               Cancel
             </button>
             <button type="submit" className={styles.submitButton}>

@@ -17,7 +17,7 @@ const EditMoviePage: React.FC = () => {
   );
 
   useEffect(() => {
-    console.log(initialMovie);
+    console.log("initialMovie", initialMovie);
   }, [initialMovie]);
 
   useEffect(() => {
@@ -31,8 +31,6 @@ const EditMoviePage: React.FC = () => {
     const fetchMovie = async () => {
       try {
         const movieData = await getMovieById(+id);
-        console.log("movieData", movieData);
-
         setInitialMovie({
           title: movieData.title,
           publishingYear: movieData.publishingYear,

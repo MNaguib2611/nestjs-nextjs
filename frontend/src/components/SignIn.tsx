@@ -5,8 +5,8 @@ import styles from "../styles/SignIn.module.css";
 import api from "../utils/api";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("john@example.com");
+  const [password, setPassword] = useState("password");
   const [error, setError] = useState("");
   const router = useRouter();
 

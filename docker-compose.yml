@@ -1,14 +1,14 @@
 version: "3.8"
 
 services:
-  # frontend:
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - backend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
 
   backend:
     build:
@@ -23,7 +23,7 @@ services:
       DATABASE_URL: mysql://user:password@db/mydb
       JWT_SECRET: JWT_secret_key
     volumes:
-      - backend-uploads:/public/uploads
+      - ./backend/public/uploads:/backend/public/uploads
 
   db:
     image: mysql:5.7

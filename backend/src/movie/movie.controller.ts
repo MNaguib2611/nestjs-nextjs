@@ -62,6 +62,7 @@ export class MovieController {
     @UploadedFile() file: Express.Multer.File,
   ): Promise<{ url: string }> {
     const url = `${process.env.BASE_URL}/public/uploads/${file.filename}`;
+    console.log(url);
     return { url };
   }
 
